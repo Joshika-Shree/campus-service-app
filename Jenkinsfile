@@ -6,40 +6,48 @@ pipeline {
     }
 
     stages {
+
         stage('Checkout') {
             steps {
-                // In a real Jenkins environment, this relies on SCM configuration
-                // checkout scm  
-                echo "Code checked out."
+                checkout scm
             }
         }
-        
-        stage('Install Dependencies') {
+
+        stage('Install Backend') {
             steps {
-                echo "Installing Server Dependencies..."
                 dir('server') {
-                    bat 'npm install'
-                }
-                echo "Installing Client Dependencies..."
-                dir('client') {
-                    bat 'npm install'
+                    sh 'npm install'
                 }
             }
         }
-        
+
+        stage('Install Frontend') {
+            steps {
+                dir('client') {
+                    sh 'npm install'
+                }
+            }
+        }
+
         stage('Test Backend') {
             steps {
                 dir('server') {
-                    bat 'npm test'
+                    sh 'npm test'
                 }
             }
         }
-        
+
         stage('Build Frontend') {
             steps {
                 dir('client') {
-                    bat 'npm run build'
+                    sh 'npm run build'
                 }
+            }
+        }
+
+        stage('Deploy Docker') {
+            steps {
+                sh 'docker-compose up -d --build'
             }
         }
     }

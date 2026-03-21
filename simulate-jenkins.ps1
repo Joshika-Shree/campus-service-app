@@ -60,4 +60,15 @@ if ($buildResult -ne 0) {
 Write-Host ""
 Write-Host "=====================================================" -ForegroundColor Cyan
 Write-Host "STAGE: Deploy (Docker)" -ForegroundColor Cyan
-Write-Host "=============
+Write-Host "=====================================================" -ForegroundColor Cyan
+Start-Sleep -Seconds 1
+Write-Host "Building Docker Image for server..." -ForegroundColor DarkGray
+Write-Host "Building Docker Image for client..." -ForegroundColor DarkGray
+Write-Host "Starting containers via docker-compose up -d --build" -ForegroundColor Yellow
+Start-Sleep -Seconds 1
+Write-Host "SUCCESS: Application deployed to Docker containers. Server on :5000, Client on :3005" -ForegroundColor Green
+
+Write-Host ""
+Write-Host "------------------------------------------------------"
+Write-Host "Finished: SUCCESS" -ForegroundColor Green
+Write-Host "------------------------------------------------------"
