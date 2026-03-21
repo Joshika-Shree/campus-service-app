@@ -1,0 +1,14 @@
+{
+  "name": "smart-campus-requests",
+  "version": "1.0.0",
+  "description": "Smart Campus Service Request System Monorepo",
+  "scripts": {
+    "start": "cd server && npm start",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "test:server": "cd server && npm test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
