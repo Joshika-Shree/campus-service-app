@@ -41,10 +41,12 @@ pipeline {
             steps {
                 echo 'Installing Server Dependencies...'
                 dir('server') {
+                    sh 'rm -rf node_modules package-lock.json || true'
                     sh 'npm install'
                 }
                 echo 'Installing Client Dependencies...'
                 dir('client') {
+                    sh 'rm -rf node_modules package-lock.json || true'
                     sh 'npm install'
                 }
             }
