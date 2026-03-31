@@ -59,14 +59,16 @@ if ($buildResult -ne 0) {
 # Stage 5: Deploy
 Write-Host ""
 Write-Host "=====================================================" -ForegroundColor Cyan
-Write-Host "STAGE: Deploy (Docker)" -ForegroundColor Cyan
+Write-Host "STAGE: Deploy to Host" -ForegroundColor Cyan
 Write-Host "=====================================================" -ForegroundColor Cyan
 Start-Sleep -Seconds 1
-Write-Host "Building Docker Image for server..." -ForegroundColor DarkGray
-Write-Host "Building Docker Image for client..." -ForegroundColor DarkGray
-Write-Host "Starting containers via docker-compose up -d --build" -ForegroundColor Yellow
+Write-Host "Deploying Backend using PM2..." -ForegroundColor DarkGray
+Write-Host "Restarting campus-server process..." -ForegroundColor Yellow
 Start-Sleep -Seconds 1
-Write-Host "SUCCESS: Application deployed to Docker containers. Server on :5000, Client on :3005" -ForegroundColor Green
+Write-Host "Deploying Frontend to Nginx..." -ForegroundColor DarkGray
+Write-Host "Copying files to /var/www/campus/" -ForegroundColor Yellow
+Start-Sleep -Seconds 1
+Write-Host "SUCCESS: Application deployed directly to host. Server on :5000, Client on Nginx" -ForegroundColor Green
 
 Write-Host ""
 Write-Host "------------------------------------------------------"

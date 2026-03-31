@@ -3,7 +3,10 @@ pipeline {
 
     environment {
         CI = 'true'
-        PATH = "/usr/local/bin:/usr/bin:/bin:${env.PATH}"
+    }
+
+    triggers {
+        githubPush()
     }
 
     stages {
@@ -22,6 +25,15 @@ pipeline {
                 echo 'Installing Client Dependencies...'
                 dir('client') {
                     sh 'npm install'
+                }
+            }
+        }
+
+        stage('Test Backend') {
+            steps {
+                echo 'Testing Backend...'
+                dir('server') {
+                    sh 'npm test'
                 }
             }
         }
