@@ -3,25 +3,51 @@ pipeline {
 
     environment {
         CI = 'true'
+        PATH = "/usr/local/bin:/usr/bin:/bin:${env.PATH}"
     }
 
     stages {
-
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
-        stage('Deploy Docker') {
+        stage('Install Dependencies') {
             steps {
-                sh 'docker compose up -d --build'
+                echo 'Installing Server Dependencies...'
+                dir('server') {
+                    sh 'npm install'
+                }
+                echo 'Installing Client Dependencies...'
+                dir('client') {
+                    sh 'npm install'
+                }
             }
         }
 
-        stage('Cleanup') {
+        stage('Build Frontend') {
             steps {
-                sh 'docker image prune -f'
+                echo 'Building Frontend...'
+                dir('client') {
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        stage('Deploy Host') {
+            steps {
+                echo 'Deploying to Host...'
+                
+                // Deploy Backend using PM2
+                sh 'pm2 delete campus-server || true'
+                sh 'pm2 start server/server.js --name campus-server'
+                
+                // Deploy Frontend to Nginx directory
+                sh 'rm -rf /var/www/campus/*'
+                sh 'cp -r client/dist/* /var/www/campus/'
+                
+                echo 'Deployment Complete!'
             }
         }
     }
