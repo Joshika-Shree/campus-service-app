@@ -22,9 +22,10 @@ pipeline {
                 sh '''
                 if ! command -v npm > /dev/null 2>&1
                 then
-                    echo "Node.js not found. Installing..."
-                    curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-                    sudo apt-get install -y nodejs
+                    echo "Node.js not found. Bypassing 'apt' and installing pure binaries..."
+                    wget https://nodejs.org/dist/v20.12.2/node-v20.12.2-linux-x64.tar.xz -O /tmp/node.tar.xz
+                    sudo tar -xJvf /tmp/node.tar.xz -C /usr/local --strip-components=1
+                    rm /tmp/node.tar.xz
                 fi
                 
                 if ! command -v pm2 > /dev/null 2>&1
