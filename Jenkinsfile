@@ -16,6 +16,26 @@ pipeline {
             }
         }
 
+        stage('Setup Environment') {
+            steps {
+                echo 'Ensuring Node.js and PM2 are installed...'
+                sh '''
+                if ! command -v npm > /dev/null 2>&1
+                then
+                    echo "Node.js not found. Installing..."
+                    curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+                    sudo apt-get install -y nodejs
+                fi
+                
+                if ! command -v pm2 > /dev/null 2>&1
+                then
+                    echo "PM2 not found. Installing globally..."
+                    sudo npm install -g pm2
+                fi
+                '''
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
                 echo 'Installing Server Dependencies...'
