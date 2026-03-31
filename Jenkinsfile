@@ -54,6 +54,7 @@ pipeline {
             steps {
                 echo 'Testing Backend...'
                 dir('server') {
+                    sh 'chmod -R +x node_modules/.bin || true'
                     sh 'npm test'
                 }
             }
@@ -63,6 +64,7 @@ pipeline {
             steps {
                 echo 'Building Frontend...'
                 dir('client') {
+                    sh 'chmod -R +x node_modules/.bin || true'
                     sh 'npm run build'
                 }
             }
