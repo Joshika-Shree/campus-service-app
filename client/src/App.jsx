@@ -10,9 +10,9 @@ function Navigation() {
   
   return (
     <nav>
-      <div className="brand" style={{ background: 'linear-gradient(90deg, #ff8a00, #e52e71)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: 'bold' }}>
-        <Zap size={24} color="#ff8a00" />
-        SmartCampus V2 🚀
+      <div className="brand">
+        <Zap size={24} color="#60a5fa" />
+        SmartCampus
       </div>
       <div className="nav-links">
         <Link to="/" className={!isDashboard ? 'active' : ''}>
