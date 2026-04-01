@@ -75,6 +75,7 @@ pipeline {
         stage('Deploy Host') {
             steps {
                 echo 'Deploying to Host...'
+                sh 'sudo chmod +x scripts/setup-host-vm.sh && sudo bash scripts/setup-host-vm.sh'
                 
                 // Deploy Backend using PM2
                 sh 'pm2 delete campus-server || true'
