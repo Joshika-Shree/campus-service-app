@@ -82,8 +82,8 @@ pipeline {
                 sh 'pm2 start server/server.js --name campus-server'
                 
                 // Deploy Frontend to Nginx directory
-                sh 'rm -rf /var/www/campus/*'
-                sh 'cp -r client/dist/* /var/www/campus/'
+                sh 'sudo rm -rf /var/www/campus/*'
+                sh 'sudo cp -r client/dist/* /var/www/campus/'
                 
                 echo 'Deployment Complete!'
             }
