@@ -43,7 +43,6 @@ export default function Portal() {
             <option value="">Select a category</option>
             <option value="IT">IT Support</option>
             <option value="Maintenance">Maintenance</option>
-            <option value="Maintenance">HOSTELll</option>
             <option value="Facilities">Facilities &  Cleaning</option>
             <option value="Other">Other</option>
           </select>
